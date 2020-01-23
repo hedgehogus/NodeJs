@@ -4,7 +4,7 @@ const fs = require('fs');
     if (error) throw error;
 
     console.log('file created');
-}) */
+}) */ 
 
 function getValue(flag) {
     const index = process.argv.indexOf(flag);
