@@ -14,3 +14,7 @@ https://nodejs.org/dist/latest-v13.x/docs/api/documentation.html
 ---
 
 In node every file is separate module and all variables set to this module.
+
+---
+
+**ENOENT - Error NO ENTry (or Error NO ENTity)**
