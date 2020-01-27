@@ -9,7 +9,7 @@
 
 // const { users, getUsers} = require('./db');
 
-const db = require('./db');
+const { db } = require('./module');
 
 const user = new db.User('fisr', 'last');
 
