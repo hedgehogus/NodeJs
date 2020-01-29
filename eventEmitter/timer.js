@@ -1,4 +1,4 @@
-const EventEmitter = require('events');
+const EventEmitter = require('./event-emitter');
 
 class Timer extends EventEmitter {
     constructor(total) {
@@ -30,8 +30,10 @@ class Timer extends EventEmitter {
 
 const timer = new Timer(10);
 
-timer.once('start', () => console.log('Start'));
+// timer.once('start', () => console.log('Start'));
+timer.on('start', () => console.log('Start'));
 timer.on('tick', tick => console.log(tick));
-timer.once('end', () => console.log('End'));
+// timer.once('end', () => console.log('End'));
+timer.on('end', () => console.log('End'));
 
 timer.start();
