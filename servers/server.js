@@ -17,7 +17,7 @@ const html = `
         <head>
             <meta charset="utf-8">
             <title>Node.js basics</title>
-            <link rel="stylesheet" href="app.css"
+            <link rel="stylesheet" href="app.css">
         </head>
         <body>
             <h1 class='red'>Node.js basics</h1>
