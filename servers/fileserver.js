@@ -27,21 +27,20 @@ http.createServer((req, res) => {
 
         })
     } else if (req.url.match(/.png$/)) {
-        fs.readFile(path.join(__dirname, 'public', req.url), (error, image) => {
-            if (error) return handleError(error, res);
+        const stream = fs.createReadStream(path.join(__dirname, 'public', req.url))
 
-            res.writeHead(200, {'Content-Type': 'image/png'});
-            res.end(image);
+        stream.on('error', error => handleError(error, res))
+         
+        res.writeHead(200, {'Content-Type': 'image/png'});
+        stream.pipe(res);
 
-        })
     } else if (req.url.match(/.js$/)) {
-        fs.readFile(path.join(__dirname, 'public', req.url), (error, js) => {
-            if (error) return handleError(error, res);
+        const stream = fs.createReadStream(path.join(__dirname, 'public', req.url))
 
-            res.writeHead(200, {'Content-Type': 'text/javascript'});
-            res.end(js);
-
-        })
+        stream.on('error', error => handleError(error, res));
+        
+        res.writeHead(200, {'Content-Type': 'text/javascript'});
+        stream.pipe(res);       
     } else {
         res.writeHead(404, {'Content-Type': 'text/plain'});
         res.end('404 not found');
