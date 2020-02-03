@@ -2,6 +2,18 @@ const http = require('http');
 const fs = require('fs');
 const path = require('path');
 
+function parseBody(body) {
+    //username=test&password=lyuda
+    const result = {};
+    const keyValuePairs = body.split('&'); // ['username=test', 'password=lyuda']
+    keyValuePairs.forEach(element => {
+        const [key, value] = element.split('='); ['username', 'test'];
+        result[key] = value;
+    });
+
+    return result;
+}
+
 http.createServer((req, res) => {
     switch(req.method) {
         case 'GET':
@@ -15,7 +27,9 @@ http.createServer((req, res) => {
             req.setEncoding('utf-8');
             req.on('data', data => body += data);
             req.on ('end', () => {
-                console.log(body);
+                const data = parseBody(body);
+                res.writeHead(200, {'Content-Type': 'application/json'});
+                res.end(JSON.stringify(data));
             })
             break;    
     }
