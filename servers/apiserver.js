@@ -1,6 +1,8 @@
 const http = require('http');
 const todos = require('./data/todos');
 
+//get post patch put delete and others
+
 http.createServer((req, res) => {
     // res.writeHead(200, {'Content-Type': 'application/json; charset=utf-8'});
     // res.end(JSON.stringify(todos));
