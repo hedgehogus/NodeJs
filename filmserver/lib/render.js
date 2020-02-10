@@ -1,18 +1,26 @@
 const fs = require('fs');
 const path = require('path');
 
-function render(templateName, data, done){
+function render(res, templateName, data){
     fs.readFile(path.resolve('views', templateName), 'utf-8', (error, template) => {
-        if (error) return done(error);
+        if (error) {
+            res.writeHead(500, {'Content-Type': 'text/plain'});
+            return res.end(error.message);
+        };
 
-        if (!data) return done(null, template);
+        let html = template;
 
-        const html = template.replace(/{{([^{}]*)}}/g, (placeholder, property) => {
-            const match = data[property];
-            return match || placeholder;
-        });
+        if (data) {
+            html = template.replace(/{{([^{}]*)}}/g, (placeholder, property) => {
+                const match = data[property];
+                return match || placeholder;
+            });
+        }
 
-        done(null, html);
+
+        res.statusCode = 200;
+        res.writeHead(200, 'Content-Type', 'text/html');
+        res.end(html);
     })
 }
 
