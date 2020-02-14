@@ -15,4 +15,12 @@ npm ls -g --depth=0  - *display main global packages*
 "^3.4.1"  - SemVer - *semantic versioning* 
 3 - main version of package - some changes need to be done in code
 4 - secondary version (usually api not changed);  ^ - last secondary version  
-2 - corrections  
+2 - corrections   ~ - last non important version
+
+*install exact version of package*
+npm install colors@1.0.0
+
+npm outdated *information obout different packages versions*
+npm install
+
+npm update - update all packages
