@@ -23,4 +23,7 @@ npm install colors@1.0.0
 npm outdated *information obout different packages versions*
 npm install
 
-npm update - update all packages
+npm update - *update all packages*
+
+npm uninstall colors  - *remove package from project*
+npm uninstall mocha --save-dev
