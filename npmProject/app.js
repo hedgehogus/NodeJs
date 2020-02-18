@@ -3,6 +3,16 @@ const todos = require('./todos');
 
 const app = express();
 
+function log(req, res, next) {
+    let date = new Date(Date.now());
+
+    console.log(`${date} - ${req.method} - ${req.url}`);
+
+    res.end();
+}
+
+app.use(log);
+
 app.get('/', (req, res) => {
     // res.send('<h1>express</h1>'); //instead of res.end for correct headers
 
