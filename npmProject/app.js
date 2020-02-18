@@ -12,6 +12,8 @@ const app = express();
     next();
 }); */
 
+app.set('view engine', 'pug');
+
 app.use(morgan('dev'));
 
 // app.use(morgan('combined'));
@@ -20,10 +22,14 @@ app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
     // res.send('<h1>express</h1>'); //instead of res.end for correct headers
-
     // res.json({title: 'express'}); // we can use res.json() instead of res.send if we sure we senging json
 
-    res.send('express Todo');
+    //res.send('express Todo');
+
+    res.render('index', {
+        title: 'Express Todo!',
+        todos
+    });
 });
 
 app.get('/todos', (req, res) => {
