@@ -1,15 +1,22 @@
 const express = require('express');
 const todos = require('./todos');
+const morgan = require('morgan')
 
 const app = express();
 
-app.use('/log', (req, res, next) => {
+/* app.use('/log', (req, res, next) => {
     let date = new Date(Date.now());
 
     console.log(`${date} - ${req.method} - ${req.url}`);
 
     next();
-});
+}); */
+
+app.use(morgan('dev'));
+
+// app.use(morgan('combined'));
+
+app.use(express.static(__dirname + '/public'));
 
 app.get('/', (req, res) => {
     // res.send('<h1>express</h1>'); //instead of res.end for correct headers
