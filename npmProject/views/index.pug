@@ -1,13 +1,9 @@
-doctype html
-html(lang='ru')
-    head
-        meta(charset='utf-8')
-        title= title
-        link(rel='stylesheet' 
-        href="/styles.css")
-    body
-        h1= title
+extends layout
 
-        ul
+block main
+    if todos
+        ul#todo-list
             for todo in todos
-                li= todo.title
+                li.todo-list__item(class={'completed': todo.completed})= todo.title
+    else 
+        p no tasks
