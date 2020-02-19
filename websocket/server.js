@@ -1,11 +1,18 @@
-const Server = require('socket.io');
+const WebSocket = require('ws');
 
-const server = new Server(5000);
+const server = new WebSocket.Server({port: 5001});
 
-server.on('connection', socket => {
-    socket.on('chat', message => {
-        server.emit('chat', message);
-    });
-
-    socket.emit('ready', 'Добро пожаловать в CodeDojo');
-});
+server.on('connection', ws => {
+    ws.on('message', message => {
+        if (message === 'exit') {
+            ws.close();
+        } else {
+            server.clients.forEach(client => {
+                if (client.readyState === WebSocket.OPEN){
+                    client.send(message);
+                }
+            })
+        }       
+    })
+    ws.send('welcome codojo');
+})
