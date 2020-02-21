@@ -21,7 +21,7 @@ function printMessage(value) {
 form.addEventListener('submit', event => {
     event.preventDefault();
 
-    socket.send(input.value);
+    socket.emit('chat', input.value);
     input.value = '';
 });
 
