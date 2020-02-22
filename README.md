@@ -49,6 +49,25 @@ node -> **REPL** - read evaluate print loop
 - **fs.readfile('note.md', (error, data) => {}** - data is buffer, or pass 'utf-8' as second argument
 - **fs.writeFile('note.md', 'content', (error) => {})**
 - **const watcher = fs.watch(__dirname, (event, filename) => {})** - watcher.on('error', error => {})
+- **fs.createReadStream('name.txt', 'utf-8)** => input.on('data', part => {}); input.on('end'); input.on('error');
+- **fs.createWriteStream('name.txt')** => output.write(part);
+- **input.pipe(output)** or input.pipe(gzip).pipe(output) => duplex stream(readable and writable)
+
+### events
+```
+const EventEmitter = require('events');
+const emitter = new EventEmitter();
+emitter.on('start', (message) => {}); or emitter.once('start', message => {})
+emitter.emit('start', 'message');
+emitter.removeAllListeners();
+
+class Timer extends EventEmitter {
+  this.emit('start);
+}
+```
+### http or https
+- **http.get(options, res => {res.statusCode; res.on('data')})** -> options = {hostname, path, headers}
+- **http.createServer()** -> server.on('request', (req,res) => {res.writeHead(200, {'Content-Type': 'text/plain'}); res.end('data')})  -> server.listen(3000, ()=> console.log())
 
 ## Modules
 
@@ -57,7 +76,7 @@ module.exports = {users}
 *exports = module.exports*
 exports.users = users
 
-###directory module
+### directory module
 create in directory file index.js, import from other files
 node modules are saving in cache - code in modules doesnt run two times 
 
