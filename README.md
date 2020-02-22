@@ -27,6 +27,7 @@ node -> **REPL** - read evaluate print loop
 - process.stdin - stdin.on('data', data => {}) // data is Buffer object
 - process.stdout - stdout.write('node')
 - process.exit() - process.on('exit', () => {})
+5) **module** & **exports**
 
 **Buffer.from('node.js')** or **Buffer.from('node.js', 'utf-8')** - create buffer from string 
 **Buffer.alloc(256)** - create empty buffer exact size
@@ -46,8 +47,27 @@ node -> **REPL** - read evaluate print loop
 - **fs.readdirSync(__dirname)** - array of directory content (for reading config)
 - **fs.readdir(__dirname, (error,contents) => {}** - async
 - **fs.readfile('note.md', (error, data) => {}** - data is buffer, or pass 'utf-8' as second argument
-- **fs.writeFile('note.md', 'content', (error) => {})
+- **fs.writeFile('note.md', 'content', (error) => {})**
 - **const watcher = fs.watch(__dirname, (event, filename) => {})** - watcher.on('error', error => {})
+
+## Modules
+
+module.exports.users = users
+module.exports = {users}
+*exports = module.exports*
+exports.users = users
+
+###directory module
+create in directory file index.js, import from other files
+node modules are saving in cache - code in modules doesnt run two times 
+
+### configured modules
+
+module.exports = greeting => {
+  return name => {
+  }
+}
+const greet = require('./greet')('hello');
 
 
 
